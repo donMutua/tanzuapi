@@ -6,14 +6,29 @@ package db
 
 import (
 	"database/sql"
+	"time"
 )
 
 type Event struct {
 	ID        int64          `json:"id"`
-	UserID    sql.NullInt64  `json:"user_id"`
 	EventName string         `json:"event_name"`
 	CreatedAt sql.NullTime   `json:"created_at"`
 	About     sql.NullString `json:"about"`
+	Cost      sql.NullString `json:"cost"`
+	StartTime sql.NullTime   `json:"start_time"`
+	EndTime   sql.NullTime   `json:"end_time"`
+}
+
+type PaymentHistory struct {
+	ID                int32          `json:"id"`
+	TicketID          sql.NullInt64  `json:"ticket_id"`
+	Status            sql.NullString `json:"status"`
+	TransactionID     sql.NullString `json:"transaction_id"`
+	TransactionType   sql.NullString `json:"transaction_type"`
+	Recipient         sql.NullString `json:"recipient"`
+	ParentTransaction sql.NullString `json:"parent_transaction"`
+	Email             sql.NullString `json:"email"`
+	Recieved          sql.NullTime   `json:"recieved"`
 }
 
 type Speaker struct {
@@ -26,20 +41,20 @@ type Speaker struct {
 }
 
 type Ticket struct {
-	ID        int32          `json:"id"`
-	EventID   sql.NullInt64  `json:"event_id"`
-	Price     sql.NullInt64  `json:"price"`
-	StartDate sql.NullTime   `json:"start_date"`
-	EndDate   sql.NullTime   `json:"end_date"`
-	Mode      sql.NullString `json:"mode"`
-	CreatedAt sql.NullTime   `json:"created_at"`
+	ID            int32          `json:"id"`
+	EventID       sql.NullInt64  `json:"event_id"`
+	Attendee      sql.NullString `json:"attendee"`
+	PaymentStatus sql.NullString `json:"payment_status"`
+	CreatedAt     sql.NullTime   `json:"created_at"`
 }
 
 type User struct {
-	ID        int64        `json:"id"`
-	FirstName string       `json:"first_name"`
-	LastName  string       `json:"last_name"`
-	Email     string       `json:"email"`
-	Role      string       `json:"role"`
-	CreatedAt sql.NullTime `json:"created_at"`
+	Username          string    `json:"username"`
+	HashedPassword    string    `json:"hashed_password"`
+	FirstName         string    `json:"first_name"`
+	LastName          string    `json:"last_name"`
+	Email             string    `json:"email"`
+	Role              string    `json:"role"`
+	PasswordChangedAt time.Time `json:"password_changed_at"`
+	CreatedAt         time.Time `json:"created_at"`
 }
