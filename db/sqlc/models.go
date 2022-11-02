@@ -10,13 +10,15 @@ import (
 )
 
 type Event struct {
-	ID        int64          `json:"id"`
-	EventName string         `json:"event_name"`
-	CreatedAt sql.NullTime   `json:"created_at"`
-	About     sql.NullString `json:"about"`
-	Cost      sql.NullString `json:"cost"`
-	StartTime sql.NullTime   `json:"start_time"`
-	EndTime   sql.NullTime   `json:"end_time"`
+	ID        int64        `json:"id"`
+	EventName string       `json:"event_name"`
+	CreatedAt sql.NullTime `json:"created_at"`
+	About     string       `json:"about"`
+	EventDate time.Time    `json:"event_date"`
+	Mode      string       `json:"mode"`
+	Cost      string       `json:"cost"`
+	StartTime time.Time    `json:"start_time"`
+	EndTime   time.Time    `json:"end_time"`
 }
 
 type PaymentHistory struct {
@@ -41,11 +43,11 @@ type Speaker struct {
 }
 
 type Ticket struct {
-	ID            int32          `json:"id"`
-	EventID       sql.NullInt64  `json:"event_id"`
-	Attendee      sql.NullString `json:"attendee"`
-	PaymentStatus sql.NullString `json:"payment_status"`
-	CreatedAt     sql.NullTime   `json:"created_at"`
+	ID            int32         `json:"id"`
+	EventID       sql.NullInt64 `json:"event_id"`
+	Attendee      string        `json:"attendee"`
+	PaymentStatus string        `json:"payment_status"`
+	CreatedAt     sql.NullTime  `json:"created_at"`
 }
 
 type User struct {

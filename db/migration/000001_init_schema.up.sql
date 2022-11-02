@@ -13,17 +13,19 @@ CREATE TABLE "events" (
   "id" bigserial PRIMARY KEY,
   "event_name" varchar NOT NULL,
   "created_at" timestamptz DEFAULT (now()),
-  "about" text,
-  "cost" decimal,
-  "start_time" timestamptz,
-  "end_time" timestamptz
+  "about" text NOT NULL,
+  "event_date" date NOT NULL,
+  "mode" varchar NOT NULL,
+  "cost" decimal NOT NULL DEFAULT 0,
+  "start_time" timestamptz NOT NULL,
+  "end_time" timestamptz NOT NULL
 );
 
 CREATE TABLE "tickets" (
   "id" SERIAL PRIMARY KEY,
   "event_id" bigserial,
-  "attendee" varchar,
-  "payment_status" varchar,
+  "attendee" varchar NOT NULL,
+  "payment_status" varchar NOT NULL,
   "created_at" timestamptz DEFAULT (now())
 );
 
